@@ -1,4 +1,4 @@
-import { mutations } from '../../../src/store/modules/todos'
+import { mutations, getters } from '../../../src/store/modules/todos'
 
 var todos = [
   {
@@ -24,7 +24,7 @@ function cloneTodos () {
 }
 
 describe('store.todos', () => {
-  describe('mutations', () => {
+  describe('Mutations', () => {
     var state
     beforeEach(() => {
       state = { todoList: cloneTodos() }
@@ -65,6 +65,20 @@ describe('store.todos', () => {
         mutations.setDone(state, 1)
         var changedItem = state.todoList.find(item => item.id === 1)
         expect(changedItem.status).to.equal('done')
+      })
+    })
+  })
+
+  describe('Getters', () => {
+    var state
+    beforeEach(() => {
+      state = { todoList: cloneTodos() }
+    })
+    describe('getTodoById', () => {
+      var todoId = 2
+      it('should return todo with given id', () => {
+        var todo = getters.getTodoById(state, getters)(todoId)
+        expect(todo).to.deep.equal(todos[1])
       })
     })
   })

@@ -1,12 +1,15 @@
 const state = {
-  todoList: []
 }
 
 function findTodo (state, todoId) {
   return state.todoList.find(todo => todo.id === todoId)
 }
 
-const getters = {}
+export const getters = {
+  getTodoById: (state) => (todoId) => {
+    return findTodo(state, todoId)
+  }
+}
 
 export const mutations = {
   resetTodos (state) {
