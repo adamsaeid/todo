@@ -67,6 +67,15 @@ describe('store.todos', () => {
         expect(changedItem.status).to.equal('done')
       })
     })
+
+    describe('addTodo', () => {
+      it('should add a new item to the todo list', () => {
+        var newItem = { id: 4, desc: 'Unpack the boxes', status: 'todo' }
+        mutations.addTodo(state, newItem)
+        var newItemFromState = state.todoList.find(item => item.id === 4)
+        expect(newItemFromState).to.equal(newItem)
+      })
+    })
   })
 
   describe('Getters', () => {

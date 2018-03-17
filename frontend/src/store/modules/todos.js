@@ -43,6 +43,9 @@ export const mutations = {
   },
   setDone (state, todoId) {
     findTodo(state, todoId).status = 'done'
+  },
+  addTodo (state, newTodo) {
+    state.todoList.push(newTodo)
   }
 }
 
