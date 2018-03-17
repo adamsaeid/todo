@@ -3,7 +3,7 @@
     <h1>Todo:</h1>
     <ul>
       <TodoItem
-        v-for="todo in todos"
+        v-for="todo in todoList"
         :key="todo.id"
         :id="todo.id"
         :desc="todo.desc"
@@ -15,31 +15,16 @@
 
 <script>
 import TodoItem from './TodoItem.vue'
+import { mapState } from 'vuex'
 export default {
   name: 'TodoList',
   components: {
     TodoItem
   },
-  data () {
-    return {
-      todos: [
-        {
-          id: 1,
-          desc: 'Walk the dog',
-          status: 'todo'
-        },
-        {
-          id: 2,
-          desc: 'Buy milk',
-          status: 'done'
-        },
-        {
-          id: 3,
-          desc: 'Replace heatsink',
-          status: 'doing'
-        }
-      ]
-    }
+  computed: {
+    ...mapState({
+      todoList: state => state.todos.todoList
+    })
   }
 }
 </script>
