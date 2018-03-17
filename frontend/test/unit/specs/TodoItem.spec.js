@@ -1,6 +1,10 @@
-import { mount } from 'vue-test-utils'
+import { mount, createLocalVue } from 'vue-test-utils'
+import Vuex from 'vuex'
 import TodoItem from '@/components/TodoItem'
 import sinon from 'sinon'
+
+const localVue = createLocalVue()
+localVue.use(Vuex)
 
 function mountItem (status) {
   const wrapper = mount(TodoItem, {
@@ -35,56 +39,43 @@ describe('TodoItem', () => {
     expect(doneItem.find('.item-text').classes()).to.contain('done-text')
   })
 
-  describe('setTodo()', () => {
-    it('should be called when "todo" button clicked', () => {
-      var wrapper = mountItem()
-      var setTodoStub = sinon.stub()
-      wrapper.setMethods({setTodo: setTodoStub})
+  describe('buttons', () => {
+    let store
+    let setTodoStub, setDoingStub, setDoneStub
 
+    beforeEach(() => {
+      setTodoStub = sinon.stub()
+      setDoingStub = sinon.stub()
+      setDoneStub = sinon.stub()
+
+      const mutations = {
+        setTodo: setTodoStub,
+        setDoing: setDoingStub,
+        setDone: setDoneStub
+      }
+
+      store = new Vuex.Store({
+        state: { },
+        mutations
+      })
+    })
+
+    it('should call setTodo mutation with correct id when "todo" button is clicked', () => {
+      var wrapper = mount(TodoItem, { propsData: {id: 2, desc: 'Buy milk', status: 'todo'}, store, localVue })
       wrapper.find('button.todo-btn').trigger('click')
-      expect(setTodoStub.called).to.equal(true)
+      expect(setTodoStub.calledWith({}, 2)).to.equal(true)
     })
 
-    it('should emit correct statusChanged event', () => {
-      var wrapper = mountItem()
-      wrapper.find('button.todo-btn').trigger('click')
-      expect(wrapper.emitted().statusChanged[0]).to.deep.equal([{id: 1, newStatus: 'todo'}])
-    })
-  })
-
-  describe('setDoing()', () => {
-    it('should be called when "doing" button clicked', () => {
-      var wrapper = mountItem()
-
-      var setDoingStub = sinon.stub()
-      wrapper.setMethods({setDoing: setDoingStub})
-
+    it('should call setDoing mutation with correct id when "doing" button is clicked', () => {
+      var wrapper = mount(TodoItem, { propsData: {id: 2, desc: 'Buy milk', status: 'todo'}, store, localVue })
       wrapper.find('button.doing-btn').trigger('click')
-      expect(setDoingStub.called).to.equal(true)
+      expect(setDoingStub.calledWith({}, 2)).to.be.equal(true)
     })
 
-    it('should emit correct statusChanged event', () => {
-      var wrapper = mountItem()
-      wrapper.find('button.doing-btn').trigger('click')
-      expect(wrapper.emitted().statusChanged[0]).to.deep.equal([{id: 1, newStatus: 'doing'}])
-    })
-  })
-
-  describe('setDone()', () => {
-    it('should be called when "done" button clicked', () => {
-      var wrapper = mountItem()
-
-      var setDoneStub = sinon.stub()
-      wrapper.setMethods({setDone: setDoneStub})
-
+    it('should call setDone mutation with correct id when "done" button is clicked', () => {
+      var wrapper = mount(TodoItem, { propsData: {id: 2, desc: 'Buy milk', status: 'todo'}, store, localVue })
       wrapper.find('button.done-btn').trigger('click')
-      expect(setDoneStub.called).to.equal(true)
-    })
-
-    it('should emit correct statusChanged event', () => {
-      var wrapper = mountItem()
-      wrapper.find('button.done-btn').trigger('click')
-      expect(wrapper.emitted().statusChanged[0]).to.deep.equal([{id: 1, newStatus: 'done'}])
+      expect(setDoneStub.calledWith({}, 2)).to.be.equal(true)
     })
   })
 })

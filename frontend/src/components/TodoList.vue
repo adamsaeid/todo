@@ -5,6 +5,7 @@
       <TodoItem
         v-for="todo in todos"
         :key="todo.id"
+        :id="todo.id"
         :desc="todo.desc"
         :status="todo.status">
       </TodoItem>

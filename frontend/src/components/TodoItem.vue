@@ -1,13 +1,14 @@
 <template>
     <li>
         <span class="item-text" :class="itemTextClassObj">{{ desc }} ({{ status }})</span>
-        <button class="todo-btn" v-on:click="setTodo">todo</button>
-        <button class="doing-btn" v-on:click="setDoing">doing</button>
-        <button class="done-btn" v-on:click="setDone">done</button>
+        <button class="todo-btn" v-on:click="setTodo(id)">todo</button>
+        <button class="doing-btn" v-on:click="setDoing(id)">doing</button>
+        <button class="done-btn" v-on:click="setDone(id)">done</button>
     </li>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   name: 'TodoItem',
   props: ['id', 'desc', 'status'],
@@ -21,15 +22,11 @@ export default {
     }
   },
   methods: {
-    setTodo: function () {
-      this.$emit('statusChanged', {id: this.id, newStatus: 'todo'})
-    },
-    setDoing: function () {
-      this.$emit('statusChanged', {id: this.id, newStatus: 'doing'})
-    },
-    setDone: function () {
-      this.$emit('statusChanged', {id: this.id, newStatus: 'done'})
-    }
+    ...mapMutations([
+      'setTodo',
+      'setDoing',
+      'setDone'
+    ])
   }
 }
 </script>
