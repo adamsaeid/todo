@@ -1,21 +1,5 @@
 const state = {
-  todoList: [
-    {
-      id: 1,
-      desc: 'Walk the dog',
-      status: 'todo'
-    },
-    {
-      id: 2,
-      desc: 'Buy milk',
-      status: 'todo'
-    },
-    {
-      id: 3,
-      desc: 'Replace heatsink',
-      status: 'todo'
-    }
-  ]
+  todoList: []
 }
 
 function findTodo (state, todoId) {

@@ -1,6 +1,7 @@
 <template>
   <div class="todo-list">
     <h1>Todo:</h1>
+    <AddTodoItem />
     <ul>
       <TodoItem
         v-for="todo in todoList"
@@ -15,11 +16,13 @@
 
 <script>
 import TodoItem from './TodoItem.vue'
+import AddTodoItem from './AddTodoItem.vue'
 import { mapState } from 'vuex'
 export default {
   name: 'TodoList',
   components: {
-    TodoItem
+    TodoItem,
+    AddTodoItem
   },
   computed: {
     ...mapState({
