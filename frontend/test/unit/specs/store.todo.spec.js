@@ -76,6 +76,14 @@ describe('store.todos', () => {
         expect(newItemFromState).to.equal(newItem)
       })
     })
+
+    describe('deleteTodo', () => {
+      it('should remove todo with given id from store', () => {
+        mutations.deleteTodo(state, 1)
+        var deletedItem = state.todoList.find(item => item.id === 1)
+        expect(deletedItem).to.equal(undefined)
+      })
+    })
   })
 
   describe('Getters', () => {

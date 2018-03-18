@@ -41,17 +41,19 @@ describe('TodoItem', () => {
 
   describe('buttons', () => {
     let store
-    let setTodoStub, setDoingStub, setDoneStub
+    let setTodoStub, setDoingStub, setDoneStub, deleteTodoStub
 
     beforeEach(() => {
       setTodoStub = sinon.stub()
       setDoingStub = sinon.stub()
       setDoneStub = sinon.stub()
+      deleteTodoStub = sinon.stub()
 
       const mutations = {
         setTodo: setTodoStub,
         setDoing: setDoingStub,
-        setDone: setDoneStub
+        setDone: setDoneStub,
+        deleteTodo: deleteTodoStub
       }
 
       store = new Vuex.Store({
@@ -76,6 +78,12 @@ describe('TodoItem', () => {
       var wrapper = mount(TodoItem, { propsData: {id: 2, desc: 'Buy milk', status: 'todo'}, store, localVue })
       wrapper.find('button.done-btn').trigger('click')
       expect(setDoneStub.calledWith({}, 2)).to.be.equal(true)
+    })
+
+    it('should call deleteTodo with correct id when "delete" button is clicked', () => {
+      var wrapper = mount(TodoItem, { propsData: {id: 2, desc: 'Buy milk', status: 'todo'}, store, localVue })
+      wrapper.find('button.delete-btn').trigger('click')
+      expect(deleteTodoStub.calledWith({}, 2)).to.be.equal(true)
     })
   })
 })

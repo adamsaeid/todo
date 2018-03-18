@@ -4,6 +4,7 @@
         <button class="todo-btn" v-on:click="setTodo(id)">todo</button>
         <button class="doing-btn" v-on:click="setDoing(id)">doing</button>
         <button class="done-btn" v-on:click="setDone(id)">done</button>
+        <button class="delete-btn" v-on:click="deleteTodo(id)">delete</button>
     </li>
 </template>
 
@@ -25,7 +26,8 @@ export default {
     ...mapMutations([
       'setTodo',
       'setDoing',
-      'setDone'
+      'setDone',
+      'deleteTodo'
     ])
   }
 }
