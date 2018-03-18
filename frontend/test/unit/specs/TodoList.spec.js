@@ -2,6 +2,7 @@ import { mount, createLocalVue } from 'vue-test-utils'
 import Vuex from 'vuex'
 import TodoList from '@/components/TodoList'
 import TodoItem from '@/components/TodoItem'
+import sinon from 'sinon'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -31,10 +32,18 @@ const mockState = {
 describe('TodoList', () => {
   let store
   let wrapper
+  let resetTodosStub
 
   beforeEach(() => {
+    resetTodosStub = sinon.stub()
+
+    const mutations = {
+      resetTodos: resetTodosStub
+    }
+
     store = new Vuex.Store({
-      state: mockState
+      state: mockState,
+      mutations
     })
 
     wrapper = mount(TodoList, { store, localVue })
@@ -49,5 +58,11 @@ describe('TodoList', () => {
     var todoItemWrapper = wrapper.findAll(TodoItem).at(0)
     var expectedProps = { id: 1, desc: 'Walk the dog', status: 'todo' }
     expect(todoItemWrapper.props()).to.deep.equal(expectedProps)
+  })
+
+  it('should call resetTodos mutation when "clear" button clicked', () => {
+    var clearButton = wrapper.find('.clear-todos-btn')
+    clearButton.trigger('click')
+    expect(resetTodosStub.called).to.equal(true)
   })
 })

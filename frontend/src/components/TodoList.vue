@@ -11,18 +11,24 @@
         :status="todo.status">
       </TodoItem>
     </ul>
+    <button class="clear-todos-btn" v-on:click="resetTodos">Clear</button>
   </div>
 </template>
 
 <script>
 import TodoItem from './TodoItem.vue'
 import AddTodoItem from './AddTodoItem.vue'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'TodoList',
   components: {
     TodoItem,
     AddTodoItem
+  },
+  methods: {
+    ...mapMutations([
+      'resetTodos'
+    ])
   },
   computed: {
     ...mapState({
