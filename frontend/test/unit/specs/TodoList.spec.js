@@ -60,6 +60,19 @@ describe('TodoList', () => {
     expect(todoItemWrapper.props()).to.deep.equal(expectedProps)
   })
 
+  it('isEmpty should be true if todo list empty', () => {
+    store.replaceState({ todos: { todoList: [] } })
+    expect(wrapper.vm.isEmpty).to.equal(true)
+  })
+
+  it('"clear" button should be disabled if todo list empty', () => {
+    store.replaceState({ todos: { todoList: [] } })
+    wrapper.update()
+    var clearButton = wrapper.find('.clear-todos-btn')
+    var disabled = clearButton.attributes().disabled
+    expect(disabled).to.equal('disabled')
+  })
+
   it('should call resetTodos mutation when "clear" button clicked', () => {
     var clearButton = wrapper.find('.clear-todos-btn')
     clearButton.trigger('click')

@@ -11,7 +11,13 @@
         :status="todo.status">
       </TodoItem>
     </ul>
-    <button class="clear-todos-btn" v-on:click="resetTodos">Clear</button>
+
+    <button
+      class="clear-todos-btn"
+      v-on:click="resetTodos"
+      :disabled="isEmpty">
+      Clear
+    </button>
   </div>
 </template>
 
@@ -33,7 +39,10 @@ export default {
   computed: {
     ...mapState({
       todoList: state => state.todos.todoList
-    })
+    }),
+    isEmpty: function () {
+      return this.todoList.length === 0
+    }
   }
 }
 </script>
