@@ -2,8 +2,5 @@ language: node_js
 node_js:
   - "node"
 addons:
-  sauce_connect:
-    username: "adamsaeid"
-  jwt:
-    secure: "G6mGr+I1mvuDUqHfrzQ7ritPbxjFF2A8lXZBJ4sEKF6JRpp5aH3mIZsfVCbbWHrrlGCGuOdWt1TglfV30bDDMXHZUT1CJk0ex0DgNV+UMslbEgaGh+QawAzE+I4ZRxeI+fNhf/4pq6DbxheW5DQZb6M2ZN4sztaViv4K26i9Z5zroloqXFrM/9c1ju6b5uXB/E75VIq3h4/F7w1GXRzbp7y7hW/mWaJJ5gtIle4hx0Z/NujUufDYqgPD8WiZUDorfimVPFgkofo/XfqSMx8JbTgOAh8Wc6ybRzDajpH5t0IoQuiJjiBVrb4YoY7r+bb0zVtYV89BkVMZwDzHZg1UHl68tCFtyTujQ5p1FQLdMd0TkfhoVP3oc5UpqoEjzVhXAMJgNMGKTebJqG3+gqignXfScd3xwKaBLlmbv0jFjlGS0XngSdu6oezL9TmorebjT8G5RIU4nJG7M1NYQIMwtKMfqQ0zmISSi7kXvNUymL1lZHEdVl/DkgPJ3cczgRoc1ss3fauty3Z/gj4jnW5DdPlE7tYx0G4lfDYtZ2drJYo/CLGQvyM2NmSaxElmhTXLFAAhtoucfRGOZI0EvOpqlUrPFVTXsxJ6piOze94cmX6sZ1wzvayBmfwg9CUXwsN/HbJqLS/NHmPQLtAwku8w+Y+2Ujsu5dFnp0BCfB9AnZk="
+  sauce_connect: true
 script: cd frontend && npm install && npm test
