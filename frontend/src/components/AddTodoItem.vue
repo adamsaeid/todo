@@ -1,8 +1,8 @@
 <template>
-    <li>
-      <input class='new-todo-input' v-model="newTodoDesc" />
-      <button class='new-todo-btn' v-on:click="onAddTodo()" :disabled="newTodoDesc === ''">Add</button>
-    </li>
+  <div>
+    <input class='new-todo-input' v-model="newTodoDesc" />
+    <button class='new-todo-btn' v-on:click="onAddTodo()" :disabled="newTodoDesc === ''">Add</button>
+  </div>
 </template>
 
 <script>
